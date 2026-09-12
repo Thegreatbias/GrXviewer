@@ -24,6 +24,16 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\publish.ps1
 
 That builds a self-contained `win-x64` app into `dist\` (and keeps any ReShade / addon files you already placed there).
 
+### Installer (full `dist\` package)
+
+Requires [Inno Setup 6](https://jrsoftware.org/isinfo.php) (`winget install JRSoftware.InnoSetup`). Packages the entire `dist\` tree (app + ReShade / DLSS / shaders) into `installer-out\GrXviewer-Setup.exe`:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\build-installer.ps1
+# or rebuild dist first:
+powershell -NoProfile -ExecutionPolicy Bypass -File .\build-installer.ps1 -Publish
+```
+
 ## Build (dev)
 
 ```powershell
@@ -92,16 +102,23 @@ They show up in the ¬ overlay. Example files ship in that folder. Reload is wat
 ## Project layout
 
 ```text
-src\           C# app (MainForm, D3D present, GPU/CPU capture, overlay)
-shaders\       User / example HLSL (copied into dist\shaders on publish)
-publish.ps1    Release publish → dist\
-OrganizeOutput.ps1  Tidies publish staging before copy to dist\
-dist\          Local runnable output (not in git — rebuild with publish.ps1)
+src\                 C# app (MainForm, D3D present, GPU/CPU capture, overlay)
+shaders\             User / example HLSL (copied into dist\shaders on publish)
+publish.ps1          Release publish → dist\
+build-installer.ps1  Inno Setup package of dist\ → installer-out\
+installer\           GrXviewer.iss (Inno Setup script)
+OrganizeOutput.ps1   Tidies publish staging before copy to dist\
+dist\                Local runnable output (not in git — rebuild with publish.ps1)
+installer-out\       GrXviewer-Setup.exe (not in git — rebuild with build-installer.ps1)
 ```
 
 ## Optional: ReShade / DLSS 5
 
 NVIDIA / ReShade / RenoDX binaries are **not** shipped in this repo (large + third-party). After `publish.ps1`, drop your ReShade `dxgi.dll`, addons, and DLSS files into `dist\` yourself; publish leaves those files alone.
+
+## Thanks
+
+Thanks to [DLSS5-Feeder](https://github.com/jlrouzies-fr/DLSS5-Feeder) and [renodx](https://github.com/clshortfuse/renodx) for making this possible.
 
 ## License
 
