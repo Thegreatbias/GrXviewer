@@ -1,0 +1,30 @@
+# Build / publish
+build/
+src/bin/
+src/obj/
+dist/
+
+# Local runtime state (created next to the exe)
+**/GrXviewer.settings.json
+**/captures/
+**/*.log
+**/*.log1
+**/hosttrace.txt
+**/sim-results.txt
+**/shader-compile.txt
+
+# IDE / OS
+.vs/
+.idea/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# NuGet
+*.nupkg
+**/packages/
+project.lock.json
