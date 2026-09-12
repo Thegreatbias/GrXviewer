@@ -114,7 +114,7 @@ installer-out\       GrXviewer-Setup.exe (not in git — rebuild with build-inst
 
 ## Optional: ReShade / DLSS 5
 
-NVIDIA / ReShade / RenoDX binaries are **not** shipped in this repo (large + third-party). After `publish.ps1`, drop your ReShade `dxgi.dll`, addons, and DLSS files into `dist\` yourself; publish leaves those files alone.
+NVIDIA / ReShade / RenoDX binaries (including [DLSS5-Feeder](https://github.com/jlrouzies-fr/DLSS5-Feeder) and [renodx](https://github.com/clshortfuse/renodx)) are **included in the installer** (`installer-out\GrXviewer-Setup.exe`). They are not checked into this git repo (large + third-party). For local `dist\` builds, `publish.ps1` leaves any ReShade / addon files you already placed there alone.
 
 ## Thanks
 
